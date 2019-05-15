@@ -8,6 +8,7 @@ class Application
 	// CAMERA
 	sf::View camera;
 
+	sf::RectangleShape r;
 public:
 
 	// Base Functions
