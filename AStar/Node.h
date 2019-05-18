@@ -22,53 +22,11 @@ public:
 	};
 	~Node() {};
 
-	void SetType(GridType _type)
-	{
-		type = _type;
-		sf::Color colour = type == EMPTY ? sf::Color::White : sf::Color::Red;
-		rectangleShape.setFillColor(colour);
-	}
-
-	void SetHoverType(HoverType _hoverType)
-	{
-		hoverType = _hoverType;
-		UpdateHover();
-	}
-
-	void UpdateHover()
-	{
-		sf::Color colour;
-		switch (hoverType)
-		{
-		case HOVER_NONE:
-			switch (type)
-			{
-			case EMPTY: colour = sf::Color::White;
-				break;
-			case WALL: colour = sf::Color::Red;
-				break;
-			}
-			break;
-		case HOVER_EMPTY:
-			colour = sf::Color(255, 255, 255, 200);
-			break;
-		case HOVER_WALL:
-			colour = sf::Color(255, 0, 0, 200);
-			break;
-		}
-
-		rectangleShape.setFillColor(colour);
-	}
-
-	GridType GetType()
-	{
-		return type;
-	}
-
-	sf::RectangleShape &GetRectangle()
-	{
-		return rectangleShape;
-	}
+	void SetType(GridType _type);
+	void SetHoverType(HoverType _hoverType);
+	void UpdateHover();
+	GridType GetType();
+	sf::RectangleShape &GetRectangle();
 
 	/*bool Hover(sf::Vector2i mousePosition)
 	{

@@ -29,8 +29,8 @@ void Application::Update()
 	Input();
 	FpsCounter();
 
-	if (sf::Mouse::getPosition(window).x <= (RECTANGLE_SIZE * (GRID_WIDTH - 1)) 
-		&& sf::Mouse::getPosition(window).y <= (RECTANGLE_SIZE * (GRID_HEIGHT - 1))
+	if (sf::Mouse::getPosition(window).x < (RECTANGLE_SIZE * (GRID_WIDTH)) 
+		&& sf::Mouse::getPosition(window).y < (RECTANGLE_SIZE * (GRID_HEIGHT))
 		&& sf::Mouse::getPosition(window).x > 0
 		&& sf::Mouse::getPosition(window).y > 0)
 	{
@@ -51,11 +51,22 @@ void Application::Update()
 				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_NONE);
 				break;
 			}
-
 			r[prevSelectedNode.x][prevSelectedNode.y].SetHoverType(HOVER_NONE);
 			prevSelectedNode = selectedNode;
 		}
 		
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			switch (buildType)
+			{
+			case BUILD_EMPTY:
+				r[selectedNode.x][selectedNode.y].SetType(EMPTY);
+				break;
+			case BUILD_WALL:
+				r[selectedNode.x][selectedNode.y].SetType(WALL);
+				break;
+			}
+		}
 	}
 
 	Render();
