@@ -6,7 +6,8 @@ void Application::Init()
 	camera.reset(sf::FloatRect(window.getSize().x, window.getSize().y, window.getSize().x, window.getSize().y));
 	camera.setCenter(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 
-	
+	buildType = BUILD_NONE;
+
 	// Initialise Grid
 	int i = 0;
 	int j = 0;
@@ -32,15 +33,7 @@ void Application::Update()
 	Input();
 	FpsCounter();
 
-	// Detect selected node using mouse position
-	if (sf::Mouse::getPosition(window).x < (RECTANGLE_SIZE * (GRID_WIDTH)) 
-		&& sf::Mouse::getPosition(window).y < (RECTANGLE_SIZE * (GRID_HEIGHT))
-		&& sf::Mouse::getPosition(window).x > 0
-		&& sf::Mouse::getPosition(window).y > 0)
-	{
-		selectedNode.x = (int)(sf::Mouse::getPosition(window).x / RECTANGLE_SIZE);
-		selectedNode.y = (int)(sf::Mouse::getPosition(window).y / RECTANGLE_SIZE);
-	}
+	DetectSelectedNode();
 
 	Render();
 }
@@ -68,38 +61,6 @@ void Application::Input()
 {
 	ImguiInput();
 
-	// Highlight the selected node
-	if (selectedNode.x != prevSelectedNode.x || selectedNode.y != prevSelectedNode.y)
-	{
-		switch (buildType)
-		{
-		case BUILD_EMPTY:
-			r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_EMPTY);
-			break;
-		case BUILD_WALL:
-			r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_WALL);
-			break;
-		case BUILD_NONE:
-			r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_NONE);
-			break;
-		}
-		r[prevSelectedNode.x][prevSelectedNode.y].SetHoverType(HOVER_NONE);
-		prevSelectedNode = selectedNode;
-	}
-
-	// Build on grid
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		switch (buildType)
-		{
-		case BUILD_EMPTY:
-			r[selectedNode.x][selectedNode.y].SetType(EMPTY);
-			break;
-		case BUILD_WALL:
-			r[selectedNode.x][selectedNode.y].SetType(WALL);
-			break;
-		}
-	}
 
 }
 void Application::ImguiInput()
@@ -158,4 +119,52 @@ void Application::ResetGrid()
 				r[i][j].SetType(EMPTY);
 		}
 	}
+}
+
+void Application::DetectSelectedNode()
+{
+
+	// Detect selected node using mouse position
+	if (sf::Mouse::getPosition(window).x < (RECTANGLE_SIZE * (GRID_WIDTH))
+		&& sf::Mouse::getPosition(window).y < (RECTANGLE_SIZE * (GRID_HEIGHT))
+		&& sf::Mouse::getPosition(window).x > 0
+		&& sf::Mouse::getPosition(window).y > 0)
+	{
+		selectedNode.x = (int)(sf::Mouse::getPosition(window).x / RECTANGLE_SIZE);
+		selectedNode.y = (int)(sf::Mouse::getPosition(window).y / RECTANGLE_SIZE);
+
+		// Highlight the selected node
+		if (selectedNode.x != prevSelectedNode.x || selectedNode.y != prevSelectedNode.y)
+		{
+			switch (buildType)
+			{
+			case BUILD_EMPTY:
+				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_EMPTY);
+				break;
+			case BUILD_WALL:
+				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_WALL);
+				break;
+			case BUILD_NONE:
+				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_NONE);
+				break;
+			}
+			r[prevSelectedNode.x][prevSelectedNode.y].SetHoverType(HOVER_NONE);
+			prevSelectedNode = selectedNode;
+		}
+
+		// Build on grid
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			switch (buildType)
+			{
+			case BUILD_EMPTY:
+				r[selectedNode.x][selectedNode.y].SetType(EMPTY);
+				break;
+			case BUILD_WALL:
+				r[selectedNode.x][selectedNode.y].SetType(WALL);
+				break;
+			}
+		}
+	}
+
 }

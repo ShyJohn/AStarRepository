@@ -20,10 +20,13 @@ class Application
 
 	sf::Clock deltaClock;
 
+	
+	void Init();
 	void Input();
 	void ImguiInput();
 	void FpsCounter();
 	void ResetGrid();
+	void DetectSelectedNode();
 
 	sf::Vector2i selectedNode;
 	sf::Vector2i prevSelectedNode;
@@ -33,13 +36,12 @@ public:
 	
 
 	// Base Functions
-	void Init();
 	void Render();
 	void Update();
 	
 	// CONSTRUCTOR
 	Application(sf::RenderWindow& windowref) : window(windowref) {
-		buildType = BUILD_NONE;
+		Init();
 	}
 	~Application() {};
 
