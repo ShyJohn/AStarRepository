@@ -19,8 +19,11 @@ class Application
 	BuildType buildType;
 
 	sf::Clock deltaClock;
+
 	void Input();
+	void ImguiInput();
 	void FpsCounter();
+	void ResetGrid();
 
 	sf::Vector2i selectedNode;
 	sf::Vector2i prevSelectedNode;
