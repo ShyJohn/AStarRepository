@@ -2,30 +2,33 @@
 
 void Application::Init()
 {
+	int i, j;
+
 	// INIT CAMERA
 	camera.reset(sf::FloatRect(window.getSize().x, window.getSize().y, window.getSize().x, window.getSize().y));
 	camera.setCenter(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 
 	buildType = BUILD_NONE;
 
-	// Initialise Grid
-	int i = 0;
-	int j = 0;
+	// Allocate memory for grid array
+	node = new Node*[GRID_WIDTH];
+	for (i = 0; i < GRID_WIDTH; i++)
+		node[i] = new Node[GRID_HEIGHT];
 
+	// Initialise Grid
 	for (i = 0; i < GRID_WIDTH; i++)
 	{
 		for (j = 0; j < GRID_HEIGHT; j++)
 		{
-			r[i][j].GetRectangle().setSize(sf::Vector2f(RECTANGLE_SIZE - 1.0f, RECTANGLE_SIZE - 1.0f));
-			r[i][j].GetRectangle().setPosition(sf::Vector2f(RECTANGLE_SIZE * i, RECTANGLE_SIZE * j));
+			node[i][j].GetRectangle().setSize(sf::Vector2f(RECTANGLE_SIZE - 1.0f, RECTANGLE_SIZE - 1.0f));
+			node[i][j].GetRectangle().setPosition(sf::Vector2f(RECTANGLE_SIZE * i, RECTANGLE_SIZE * j));
 
 			if (i == 0 || i == GRID_WIDTH - 1 || j == 0 || j == GRID_HEIGHT - 1)
-				r[i][j].SetType(WALL);
+				node[i][j].SetType(WALL);
 			else
-				r[i][j].SetType(EMPTY);
+				node[i][j].SetType(EMPTY);
 		}
 	}
-
 }
 
 void Application::Update()
@@ -47,7 +50,7 @@ void Application::Render()
 	{
 		for (int j = 0; j < GRID_HEIGHT; j++)
 		{
-			window.draw(r[i][j].GetRectangle());
+			window.draw(node[i][j].GetRectangle());
 		}
 	}
 
@@ -60,7 +63,6 @@ void Application::Render()
 void Application::Input()
 {
 	ImguiInput();
-
 
 }
 void Application::ImguiInput()
@@ -81,11 +83,12 @@ void Application::ImguiInput()
 	if (ImGui::Button("Empty")) {
 		buildType = BUILD_EMPTY;
 	}
-	ImGui::SameLine();
 	if (ImGui::Button("Reset Grid")) {
 		ResetGrid();
 	}
-
+	if (ImGui::Button("Load Grid From File")) {
+		fileHandler.LoadLevel(node);
+	}
 	ImGui::End();
 }
 
@@ -114,9 +117,9 @@ void Application::ResetGrid()
 		for (j = 0; j < GRID_HEIGHT; j++)
 		{
 			if (i == 0 || i == GRID_WIDTH - 1 || j == 0 || j == GRID_HEIGHT - 1)
-				r[i][j].SetType(WALL);
+				node[i][j].SetType(WALL);
 			else
-				r[i][j].SetType(EMPTY);
+				node[i][j].SetType(EMPTY);
 		}
 	}
 }
@@ -139,16 +142,16 @@ void Application::DetectSelectedNode()
 			switch (buildType)
 			{
 			case BUILD_EMPTY:
-				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_EMPTY);
+				node[selectedNode.x][selectedNode.y].SetHoverType(HOVER_EMPTY);
 				break;
 			case BUILD_WALL:
-				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_WALL);
+				node[selectedNode.x][selectedNode.y].SetHoverType(HOVER_WALL);
 				break;
 			case BUILD_NONE:
-				r[selectedNode.x][selectedNode.y].SetHoverType(HOVER_NONE);
+				node[selectedNode.x][selectedNode.y].SetHoverType(HOVER_NONE);
 				break;
 			}
-			r[prevSelectedNode.x][prevSelectedNode.y].SetHoverType(HOVER_NONE);
+			node[prevSelectedNode.x][prevSelectedNode.y].SetHoverType(HOVER_NONE);
 			prevSelectedNode = selectedNode;
 		}
 
@@ -158,10 +161,10 @@ void Application::DetectSelectedNode()
 			switch (buildType)
 			{
 			case BUILD_EMPTY:
-				r[selectedNode.x][selectedNode.y].SetType(EMPTY);
+				node[selectedNode.x][selectedNode.y].SetType(EMPTY);
 				break;
 			case BUILD_WALL:
-				r[selectedNode.x][selectedNode.y].SetType(WALL);
+				node[selectedNode.x][selectedNode.y].SetType(WALL);
 				break;
 			}
 		}

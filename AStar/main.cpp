@@ -7,7 +7,6 @@ int main()
 
 	Application app(window);
 
-	//app.Init();
 	ImGui::SFML::Init(window);
 
 	while (window.isOpen())

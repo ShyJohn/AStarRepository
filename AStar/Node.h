@@ -9,7 +9,6 @@
 enum GridType { EMPTY, WALL };
 enum HoverType { HOVER_NONE, HOVER_EMPTY, HOVER_WALL };
 
-
 class Node
 {
 	sf::RectangleShape rectangleShape;

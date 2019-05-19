@@ -1,12 +1,7 @@
 #pragma once
 
-#include "Node.h"
-
+#include "FileHandler.h"
 #include <iostream>
-
-#define GRID_WIDTH 45
-#define GRID_HEIGHT 45
-#define RECTANGLE_SIZE 20
 
 enum BuildType { BUILD_NONE, BUILD_EMPTY, BUILD_WALL };
 
@@ -15,11 +10,11 @@ class Application
 	// CAMERA
 	sf::View camera;
 
-	Node r[GRID_WIDTH][GRID_HEIGHT];
+	Node** node;
+
 	BuildType buildType;
-
 	sf::Clock deltaClock;
-
+	FileHandler fileHandler;
 	
 	void Init();
 	void Input();
@@ -32,8 +27,6 @@ class Application
 	sf::Vector2i prevSelectedNode;
 
 public:
-
-	
 
 	// Base Functions
 	void Render();
