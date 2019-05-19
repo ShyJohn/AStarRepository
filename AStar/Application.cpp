@@ -9,6 +9,7 @@ void Application::Init()
 	camera.setCenter(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 
 	buildType = BUILD_NONE;
+	timer.restart();
 
 	// Allocate memory for grid array
 	node = new Node*[GRID_WIDTH];
@@ -104,9 +105,14 @@ void::Application::FpsCounter()
 	float currentTime = deltaClock.restart().asSeconds();
 	float fps = 1.f / (currentTime - lastTime);
 	lastTime = currentTime;
-
+	
+	if (timer.getElapsedTime().asMilliseconds() > 100)
+	{
+		timer.restart();
+		fpsCounter = fps;
+	}
 	ImGui::Begin("Info");
-	ImGui::Text("FPS: %.0f", fps);
+	ImGui::Text("FPS: %.0f", fpsCounter);
 	ImGui::End();
 
 }

@@ -14,6 +14,8 @@ class Application
 
 	BuildType buildType;
 	sf::Clock deltaClock;
+	sf::Clock timer;
+
 	FileHandler fileHandler;
 	
 	void Init();
@@ -26,6 +28,7 @@ class Application
 	sf::Vector2i selectedNode;
 	sf::Vector2i prevSelectedNode;
 
+	float fpsCounter;
 public:
 
 	// Base Functions

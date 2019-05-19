@@ -6,7 +6,7 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
-enum GridType { EMPTY, WALL };
+enum GridType { EMPTY, WALL, PATH, START, END };
 enum HoverType { HOVER_NONE, HOVER_EMPTY, HOVER_WALL };
 
 class Node

@@ -3,7 +3,14 @@
 void Node::SetType(GridType _type)
 {
 	type = _type;
-	sf::Color colour = type == EMPTY ? sf::Color::White : sf::Color::Red;
+	sf::Color colour;// = type == EMPTY ? sf::Color::White : sf::Color::Red;
+	switch (type)
+	{
+	case EMPTY: colour = sf::Color::White;
+		break;
+	case WALL: colour = sf::Color::Red;
+		break;
+	}
 	rectangleShape.setFillColor(colour);
 }
 
