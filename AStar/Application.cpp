@@ -30,6 +30,7 @@ void Application::Init()
 				node[i][j].SetType(EMPTY);
 		}
 	}
+
 }
 
 void Application::Update()
@@ -93,6 +94,13 @@ void Application::ImguiInput()
 	ImGui::SameLine();
 	if (ImGui::Button("Save Grid to File")) {
 		fileHandler.SaveLevel(node);
+	}
+	if (ImGui::Button("Start Point")) {
+		buildType = BUILD_START;
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("End Point")) {
+		buildType = BUILD_END;
 	}
 	ImGui::End();
 }
@@ -160,6 +168,12 @@ void Application::DetectSelectedNode()
 			case BUILD_NONE:
 				node[selectedNode.x][selectedNode.y].SetHoverType(HOVER_NONE);
 				break;
+			case BUILD_START:
+				node[selectedNode.x][selectedNode.y].SetHoverType(HOVER_START);
+				break;
+			case BUILD_END:
+				node[selectedNode.x][selectedNode.y].SetHoverType(HOVER_END);
+				break;
 			}
 			node[prevSelectedNode.x][prevSelectedNode.y].SetHoverType(HOVER_NONE);
 			prevSelectedNode = selectedNode;
@@ -175,6 +189,18 @@ void Application::DetectSelectedNode()
 				break;
 			case BUILD_WALL:
 				node[selectedNode.x][selectedNode.y].SetType(WALL);
+				break;
+			case BUILD_START:
+				node[selectedNode.x][selectedNode.y].SetType(START);
+				node[pathfinder.getPrevStart().x][pathfinder.getPrevStart().y].SetType(EMPTY);
+				pathfinder.setStart(selectedNode);
+				pathfinder.setPrevStart(selectedNode);
+				break;
+			case BUILD_END:
+				node[selectedNode.x][selectedNode.y].SetType(END);
+				node[pathfinder.getPrevEnd().x][pathfinder.getPrevEnd().y].SetType(EMPTY);
+				pathfinder.setEnd(selectedNode);
+				pathfinder.setPrevEnd(selectedNode);
 				break;
 			}
 		}

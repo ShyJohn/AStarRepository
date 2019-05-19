@@ -3,12 +3,16 @@
 void Node::SetType(GridType _type)
 {
 	type = _type;
-	sf::Color colour;// = type == EMPTY ? sf::Color::White : sf::Color::Red;
+	sf::Color colour;
 	switch (type)
 	{
 	case EMPTY: colour = sf::Color::White;
 		break;
 	case WALL: colour = sf::Color::Red;
+		break;
+	case START: colour = sf::Color::Green;
+		break;
+	case END: colour = sf::Color::Blue;
 		break;
 	}
 	rectangleShape.setFillColor(colour);
@@ -32,13 +36,19 @@ void Node::UpdateHover()
 			break;
 		case WALL: colour = sf::Color::Red;
 			break;
+		case START: colour = sf::Color::Green;
+			break;
+		case END: colour = sf::Color::Blue;
+			break;
 		}
 		break;
-	case HOVER_EMPTY:
-		colour = sf::Color(255, 255, 255, 200);
+	case HOVER_EMPTY: colour = sf::Color(255, 255, 255, 200);
 		break;
-	case HOVER_WALL:
-		colour = sf::Color(255, 0, 0, 200);
+	case HOVER_WALL: colour = sf::Color(255, 0, 0, 200);
+		break;
+	case HOVER_START: colour = sf::Color(0, 255, 0, 200);
+		break;
+	case HOVER_END: colour = sf::Color(0, 0, 255, 200);
 		break;
 	}
 

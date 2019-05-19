@@ -1,9 +1,10 @@
 #pragma once
 
+#include "AStar.h"
 #include "FileHandler.h"
 #include <iostream>
 
-enum BuildType { BUILD_NONE, BUILD_EMPTY, BUILD_WALL };
+enum BuildType { BUILD_NONE, BUILD_EMPTY, BUILD_WALL, BUILD_START, BUILD_END };
 
 class Application
 {
@@ -11,6 +12,8 @@ class Application
 	sf::View camera;
 
 	Node** node;
+
+	AStar pathfinder;
 
 	BuildType buildType;
 	sf::Clock deltaClock;
