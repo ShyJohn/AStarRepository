@@ -12,31 +12,42 @@ public:
 	{
 		std::fstream reader("Level.txt");
 		int i, j;
+		int tempType;
 
-		for (i = 0; i < GRID_WIDTH; i++)
+		if (reader.is_open())
 		{
-			for (j = 0; j < GRID_HEIGHT; j++)
+			for (i = 0; i < GRID_WIDTH; i++)
 			{
-				// Read File
-				//nodesArray[i][j].SetType(EMPTY);
+				for (j = 0; j < GRID_HEIGHT; j++)
+				{
+					// Read File
+					reader >> tempType;
+					nodesArray[i][j].SetType((GridType)tempType);
+				}
 			}
 		}
+		reader.close();
 	}
 
 	void SaveLevel(Node** nodesArray)
 	{
-		int i, j, nodeValue;
+		int i, j;
 
-		std::ofstream saveFile;
-		saveFile.open("Level.txt");
-		for (i = 0; i < GRID_WIDTH; i++)
+		std::fstream writer("Level.txt");
+
+		GridType tempType;
+
+		if (writer.is_open())
 		{
-			for (j = 0; j < GRID_HEIGHT; j++)
+			for (i = 0; i < GRID_WIDTH; i++)
 			{
-				// Save File
-				//saveFile << nodesArray[i][j];
+				for (j = 0; j < GRID_HEIGHT; j++)
+				{
+					// Save File
+					writer << (int)nodesArray[i][j].GetType() << std::endl;
+				}
 			}
 		}
-
+		writer.close();
 	}
 };

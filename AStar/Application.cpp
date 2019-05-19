@@ -89,6 +89,10 @@ void Application::ImguiInput()
 	if (ImGui::Button("Load Grid From File")) {
 		fileHandler.LoadLevel(node);
 	}
+	ImGui::SameLine();
+	if (ImGui::Button("Save Grid to File")) {
+		fileHandler.SaveLevel(node);
+	}
 	ImGui::End();
 }
 
