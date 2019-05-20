@@ -4,47 +4,51 @@
 #include "FileHandler.h"
 #include <iostream>
 
-enum BuildType { BUILD_NONE, BUILD_EMPTY, BUILD_WALL, BUILD_START, BUILD_END };
-
-class Application
+namespace AIFramework
 {
-	// CAMERA
-	sf::View camera;
+	enum BuildType { BUILD_NONE, BUILD_EMPTY, BUILD_WALL, BUILD_START, BUILD_END };
 
-	Node** node;
+	class Application
+	{
+		// CAMERA
+		sf::View camera;
 
-	AStar pathfinder;
+		Node** node;
 
-	BuildType buildType;
-	sf::Clock deltaClock;
-	sf::Clock timer;
+		AStar pathfinder;
 
-	FileHandler fileHandler;
-	
-	void Init();
-	void Input();
-	void ImguiInput();
-	void FpsCounter();
-	void ResetGrid();
-	void DetectSelectedNode();
+		BuildType buildType;
+		sf::Clock deltaClock;
+		sf::Clock timer;
 
-	sf::Vector2i selectedNode;
-	sf::Vector2i prevSelectedNode;
+		FileHandler fileHandler;
 
-	float fpsCounter;
-public:
+		void Init();
+		void Input();
 
-	// Base Functions
-	void Render();
-	void Update();
-	
-	// CONSTRUCTOR
-	Application(sf::RenderWindow& windowref) : window(windowref) {
-		Init();
-	}
-	~Application() {};
+		void ImguiInput();
+		void FpsCounter();
+		void ResetGrid();
+		void DetectSelectedNode();
 
-	// SFML WINDOW
-	sf::RenderWindow& window;
+		sf::Vector2i selectedNode;
+		sf::Vector2i prevSelectedNode;
 
-};
+		float fpsCounter;
+	public:
+
+		// Base Functions
+		void Render();
+		void Update();
+
+		// CONSTRUCTOR
+		Application(sf::RenderWindow& windowref) : window(windowref) {
+			Init();
+		}
+		~Application() {};
+
+		// SFML WINDOW
+		sf::RenderWindow& window;
+
+	};
+}

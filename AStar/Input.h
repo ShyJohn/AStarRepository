@@ -2,19 +2,22 @@
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 
-class Input
-{
-	
-	bool leftButtonPressed;
-public:
+namespace AIFramework {
 
-	Input()
+	class Input
 	{
-		leftButtonPressed = false;
-	}
-	bool GetLeftMouseButton() { }
-	bool GetLeftMouseButtonDown() 
-	{
-			
-	}
-};
+
+	private:
+		friend class Application;
+
+		Input();
+		~Input() = default;
+
+		bool leftButtonPressed;
+	public:
+
+		static bool GetLeftMouseButton();
+		static bool GetLeftMouseButtonDown();
+
+	};
+}

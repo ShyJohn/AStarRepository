@@ -1,6 +1,8 @@
 #include "Application.h"
 
 
+using namespace AIFramework;
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "Application", sf::Style::Default);

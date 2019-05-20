@@ -4,50 +4,53 @@
 #include "Helpers.h"
 #include "Node.h"
 
-class FileHandler
+namespace AIFramework
 {
-
-public:
-	void LoadLevel(Node** nodesArray)
+	class FileHandler
 	{
-		std::fstream reader("Level.txt");
-		int i, j;
-		int tempType;
 
-		if (reader.is_open())
+	public:
+		void LoadLevel(Node** nodesArray)
 		{
-			for (i = 0; i < GRID_WIDTH; i++)
+			std::fstream reader("Level.txt");
+			int i, j;
+			int tempType;
+
+			if (reader.is_open())
 			{
-				for (j = 0; j < GRID_HEIGHT; j++)
+				for (i = 0; i < GRID_WIDTH; i++)
 				{
-					// Read File
-					reader >> tempType;
-					nodesArray[i][j].SetType((GridType)tempType);
+					for (j = 0; j < GRID_HEIGHT; j++)
+					{
+						// Read File
+						reader >> tempType;
+						nodesArray[i][j].SetType((GridType)tempType);
+					}
 				}
 			}
+			reader.close();
 		}
-		reader.close();
-	}
 
-	void SaveLevel(Node** nodesArray)
-	{
-		int i, j;
-
-		std::fstream writer("Level.txt");
-
-		GridType tempType;
-
-		if (writer.is_open())
+		void SaveLevel(Node** nodesArray)
 		{
-			for (i = 0; i < GRID_WIDTH; i++)
+			int i, j;
+
+			std::fstream writer("Level.txt");
+
+			GridType tempType;
+
+			if (writer.is_open())
 			{
-				for (j = 0; j < GRID_HEIGHT; j++)
+				for (i = 0; i < GRID_WIDTH; i++)
 				{
-					// Save File
-					writer << (int)nodesArray[i][j].GetType() << std::endl;
+					for (j = 0; j < GRID_HEIGHT; j++)
+					{
+						// Save File
+						writer << (int)nodesArray[i][j].GetType() << std::endl;
+					}
 				}
 			}
+			writer.close();
 		}
-		writer.close();
-	}
-};
+	};
+}
