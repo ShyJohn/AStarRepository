@@ -32,7 +32,6 @@ namespace AIFramework
 					node[i][j].SetType(EMPTY);
 			}
 		}
-
 	}
 
 	void Application::Update()
@@ -103,6 +102,19 @@ namespace AIFramework
 		ImGui::SameLine();
 		if (ImGui::Button("End Point")) {
 			buildType = BUILD_END;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Generate Path")) {
+			//buildType = BUILD_END;
+			pathfinder.SetGrid(node);
+			pathfinder.GeneratePath(node);
+			for (int i = 0; i < pathfinder.path.size(); i++)
+			{
+				int x = pathfinder.path.back().x;
+				int y = pathfinder.path.back().y;
+				node[x][y].SetType(PATH);
+				pathfinder.path.pop_back();
+			}
 		}
 		ImGui::End();
 	}
@@ -194,15 +206,16 @@ namespace AIFramework
 					break;
 				case BUILD_START:
 					node[selectedNode.x][selectedNode.y].SetType(START);
-					node[pathfinder.getPrevStart().x][pathfinder.getPrevStart().y].SetType(EMPTY);
-					pathfinder.setStart(selectedNode);
-					pathfinder.setPrevStart(selectedNode);
+					node[pathfinder.GetPrevStart().x][pathfinder.GetPrevStart().y].SetType(EMPTY);
+					pathfinder.SetStart(selectedNode);
+					pathfinder.SetPrevStart(selectedNode);
 					break;
 				case BUILD_END:
 					node[selectedNode.x][selectedNode.y].SetType(END);
-					node[pathfinder.getPrevEnd().x][pathfinder.getPrevEnd().y].SetType(EMPTY);
-					pathfinder.setEnd(selectedNode);
-					pathfinder.setPrevEnd(selectedNode);
+					node[pathfinder.GetPrevEnd().x][pathfinder.GetPrevEnd().y].SetType(EMPTY);
+					pathfinder.SetEnd(selectedNode);
+					pathfinder.SetPrevEnd(selectedNode);
+					
 					break;
 				}
 			}

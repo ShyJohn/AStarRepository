@@ -16,6 +16,8 @@ namespace AIFramework
 			break;
 		case END: colour = sf::Color::Blue;
 			break;
+		case PATH: colour = sf::Color::Magenta;
+			break;
 		}
 		rectangleShape.setFillColor(colour);
 	}

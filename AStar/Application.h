@@ -13,7 +13,7 @@ namespace AIFramework
 		// CAMERA
 		sf::View camera;
 
-		Node** node;
+		
 
 		AStar pathfinder;
 
@@ -49,6 +49,9 @@ namespace AIFramework
 
 		// SFML WINDOW
 		sf::RenderWindow& window;
+
+		Node** node;
+
 
 	};
 }

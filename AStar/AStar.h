@@ -19,15 +19,19 @@ namespace AIFramework
 		sf::Vector2i start;
 		sf::Vector2i end;
 
+		sf::Vector2i prevStart;
+		sf::Vector2i prevEnd;
+
 		NodeRecord nodeRecord[GRID_WIDTH][GRID_HEIGHT];
 
-		std::vector<sf::Vector2i> path;
+		bool IsValid( int x,  int y);
+		bool IsBlocked (Node** nodesArray,  int x,  int y);
+		bool IsDestination( int x,  int y);
+		float CalculateH( int x,  int y);
+		void TracePath( int x,  int y);
 
-		bool IsValid(const int x, const int y);
-		bool IsBlocked (Node** nodesArray, const int x, const int y);
-		bool IsDestination(const int x, const int y);
-		float CalculateH(const int x, const int y);
-		void TracePath(const int x, const int y);
+		typedef std::pair<int, int> Pair;
+		typedef std::pair<double, Pair> pPair;
 
 	public:
 
@@ -38,21 +42,23 @@ namespace AIFramework
 
 		~AStar() {}
 
-		void GeneratePath(Node** _grid, sf::Vector2i _start, sf::Vector2i end);
+		void GeneratePath(Node** _grid);
 
-		//// Setters
-		//void SetStart(const sf::Vector2i& _start) { start = _start; }
-		//void SetEnd(const sf::Vector2i& _end) { end = _end; }
-		//void SetPrevStart(const sf::Vector2i& _prevStart) { prevStart = _prevStart; }
-		//void SetPrevEnd(const sf::Vector2i& _prevEnd) { prevEnd = _prevEnd; }
+		// Setters
+		void SetStart( sf::Vector2i& _start) { start = _start; }
+		void SetEnd( sf::Vector2i& _end) { end = _end; }
+		void SetPrevStart( sf::Vector2i& _prevStart) { prevStart = _prevStart; }
+		void SetPrevEnd( sf::Vector2i& _prevEnd) { prevEnd = _prevEnd; }
 
-		//// Getters
-		//sf::Vector2i GetStart() const { return start; };
-		//sf::Vector2i GetEnd() const { return end; };
-		//sf::Vector2i GetPrevStart() const { return prevStart; }
-		//sf::Vector2i GetPrevEnd() const { return prevEnd; }
+		// Getters
+		sf::Vector2i GetStart() { return start; };
+		sf::Vector2i GetEnd() { return end; };
+		sf::Vector2i GetPrevStart() { return prevStart; }
+		sf::Vector2i GetPrevEnd() { return prevEnd; }
 
-		//void SetGrid(Node** _grid) { grid = _grid; }
+		void SetGrid(Node** _grid) { grid = _grid; }
+
+		std::vector<sf::Vector2i> path;
 
 	};
 }
