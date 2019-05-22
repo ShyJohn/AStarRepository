@@ -31,19 +31,17 @@ namespace AIFramework {
 
 	void AStar::TracePath(int x, int y)
 	{
-		while (!(nodeRecord[x][y].parent.x == x 
-			  && nodeRecord[x][y].parent.y == y))
+		while (!(nodeRecord[x][y].parent.x == x && nodeRecord[x][y].parent.y == y))
 		{
 			path.push_back(sf::Vector2i(x, y));
-			sf::Vector2i tempNode = nodeRecord[x][y].parent;
-			x = tempNode.x;
-			y = tempNode.y;
+			x = nodeRecord[x][y].parent.x;
+			y = nodeRecord[x][y].parent.y;
 		}
 
 		path.push_back(sf::Vector2i(x, y));
 
-		while (!path.empty())
-			path.pop_back();
+		//while (!path.empty())
+		//	path.pop_back();
 		
 		return;
 	}
@@ -87,7 +85,8 @@ namespace AIFramework {
 
 			currentNode.x = p.second.first;
 			currentNode.y = p.second.second;
-			closedList[i][j] = true;
+
+			closedList[currentNode.x][currentNode.y] = true;
 
 			double gNew, hNew, fNew;
 
@@ -101,8 +100,9 @@ namespace AIFramework {
 					nodeRecord[currentNode.x - 1][currentNode.y].parent.x = currentNode.x;
 					nodeRecord[currentNode.x - 1][currentNode.y].parent.y = currentNode.y;
 
-					TracePath(currentNode.x, currentNode.y);
+					TracePath(currentNode.x - 1, currentNode.y);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				// If the successor is already on the closed 
@@ -148,8 +148,9 @@ namespace AIFramework {
 					nodeRecord[currentNode.x + 1][currentNode.y].parent.x = currentNode.x;
 					nodeRecord[currentNode.x + 1][currentNode.y].parent.y = currentNode.y;
 
-					TracePath(currentNode.x, currentNode.y);
+					TracePath(currentNode.x + 1, currentNode.y);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x + 1][currentNode.y] == false &&
@@ -186,6 +187,7 @@ namespace AIFramework {
 
 					TracePath(currentNode.x, currentNode.y + 1);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x][currentNode.y + 1] == false &&
@@ -222,6 +224,7 @@ namespace AIFramework {
 
 					TracePath(currentNode.x, currentNode.y - 1);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x][currentNode.y - 1] == false &&
@@ -258,6 +261,7 @@ namespace AIFramework {
 
 					TracePath(currentNode.x - 1, currentNode.y - 1);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x - 1][currentNode.y - 1] == false &&
@@ -294,6 +298,7 @@ namespace AIFramework {
 
 					TracePath(currentNode.x + 1, currentNode.y - 1);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x + 1][currentNode.y - 1] == false &&
@@ -330,6 +335,7 @@ namespace AIFramework {
 
 					TracePath(currentNode.x - 1, currentNode.y + 1);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x - 1][currentNode.y + 1] == false &&
@@ -366,6 +372,7 @@ namespace AIFramework {
 
 					TracePath(currentNode.x + 1, currentNode.y + 1);
 					foundDest = true;
+					std::cout << "FOUND PATH" << std::endl;
 					return;
 				}
 				else if (closedList[currentNode.x + 1][currentNode.y + 1] == false &&

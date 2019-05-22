@@ -108,13 +108,15 @@ namespace AIFramework
 			//buildType = BUILD_END;
 			pathfinder.SetGrid(node);
 			pathfinder.GeneratePath(node);
-			for (int i = 0; i < pathfinder.path.size(); i++)
+			//cout << pathfinder.path.size();
+			while(!pathfinder.path.empty())
 			{
 				int x = pathfinder.path.back().x;
 				int y = pathfinder.path.back().y;
 				node[x][y].SetType(PATH);
 				pathfinder.path.pop_back();
 			}
+			
 		}
 		ImGui::End();
 	}
