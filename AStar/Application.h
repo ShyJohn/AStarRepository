@@ -13,8 +13,6 @@ namespace AIFramework
 		// CAMERA
 		sf::View camera;
 
-		
-
 		AStar pathfinder;
 
 		BuildType buildType;
@@ -35,6 +33,9 @@ namespace AIFramework
 		sf::Vector2i prevSelectedNode;
 
 		float fpsCounter;
+
+		bool leftclick;
+
 	public:
 
 		// Base Functions

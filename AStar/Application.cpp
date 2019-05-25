@@ -32,6 +32,8 @@ namespace AIFramework
 					node[i][j].SetType(EMPTY);
 			}
 		}
+
+		leftclick = false;
 	}
 
 	void Application::Update()
@@ -105,10 +107,8 @@ namespace AIFramework
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Generate Path")) {
-			//buildType = BUILD_END;
 			pathfinder.SetGrid(node);
 			pathfinder.GeneratePath(node);
-			//cout << pathfinder.path.size();
 			while(!pathfinder.path.empty())
 			{
 				int x = pathfinder.path.back().x;
@@ -160,7 +160,6 @@ namespace AIFramework
 
 	void Application::DetectSelectedNode()
 	{
-
 		// Detect selected node using mouse position
 		if (sf::Mouse::getPosition(window).x < (RECTANGLE_SIZE * (GRID_WIDTH))
 			&& sf::Mouse::getPosition(window).y < (RECTANGLE_SIZE * (GRID_HEIGHT))
@@ -198,6 +197,7 @@ namespace AIFramework
 			// Build on grid
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
+				leftclick = true;
 				switch (buildType)
 				{
 				case BUILD_EMPTY:
@@ -207,20 +207,22 @@ namespace AIFramework
 					node[selectedNode.x][selectedNode.y].SetType(WALL);
 					break;
 				case BUILD_START:
-					node[selectedNode.x][selectedNode.y].SetType(START);
 					node[pathfinder.GetPrevStart().x][pathfinder.GetPrevStart().y].SetType(EMPTY);
-					pathfinder.SetStart(selectedNode);
 					pathfinder.SetPrevStart(selectedNode);
+					pathfinder.SetStart(selectedNode);
+					node[selectedNode.x][selectedNode.y].SetType(START);
 					break;
 				case BUILD_END:
-					node[selectedNode.x][selectedNode.y].SetType(END);
 					node[pathfinder.GetPrevEnd().x][pathfinder.GetPrevEnd().y].SetType(EMPTY);
 					pathfinder.SetEnd(selectedNode);
 					pathfinder.SetPrevEnd(selectedNode);
-					
+					node[selectedNode.x][selectedNode.y].SetType(END);
 					break;
 				}
 			}
+			
+			if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				leftclick = false;
 		}
 
 	}

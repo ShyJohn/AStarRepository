@@ -2,13 +2,13 @@
 
 namespace AIFramework {
 
-	bool AStar::IsValid( int x,  int y)
+	bool AStar::IsValid(const int x, const int y)
 	{
 		return(x > 0) && (x < GRID_WIDTH)
 			&& (y > 0 && y < GRID_HEIGHT);
 	}
 
-	bool AStar::IsBlocked(Node** nodesArray,  int x,  int y)
+	bool AStar::IsBlocked(Node** nodesArray, const int x, const int y)
 	{
 		if (nodesArray[x][y].GetType() == WALL)
 			return true;
@@ -16,7 +16,7 @@ namespace AIFramework {
 			return false;
 	}
 
-	bool AStar::IsDestination( int x,  int y)
+	bool AStar::IsDestination(const  int x, const int y)
 	{
 		if (x == end.x && y == end.y)
 			return true;
@@ -24,7 +24,7 @@ namespace AIFramework {
 			return false;
 	}
 
-	float AStar::CalculateH( int x,  int y)
+	float AStar::CalculateH(const int x, const int y)
 	{
 		return std::sqrt((x - end.x) * (x - end.x) + (y - end.y) * (y - end.y));
 	}
@@ -39,9 +39,6 @@ namespace AIFramework {
 		}
 
 		path.push_back(sf::Vector2i(x, y));
-
-		//while (!path.empty())
-		//	path.pop_back();
 		
 		return;
 	}

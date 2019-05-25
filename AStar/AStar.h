@@ -26,9 +26,9 @@ namespace AIFramework
 
 		bool IsValid( int x,  int y);
 		bool IsBlocked (Node** nodesArray,  int x,  int y);
-		bool IsDestination( int x,  int y);
-		float CalculateH( int x,  int y);
-		void TracePath( int x,  int y);
+		bool IsDestination(int x, const int y);
+		float CalculateH(int x, int y);
+		void TracePath(int x,  int y);
 
 		typedef std::pair<int, int> Pair;
 		typedef std::pair<double, Pair> pPair;
@@ -45,10 +45,10 @@ namespace AIFramework
 		void GeneratePath(Node** _grid);
 
 		// Setters
-		void SetStart( sf::Vector2i& _start) { start = _start; }
-		void SetEnd( sf::Vector2i& _end) { end = _end; }
-		void SetPrevStart( sf::Vector2i& _prevStart) { prevStart = _prevStart; }
-		void SetPrevEnd( sf::Vector2i& _prevEnd) { prevEnd = _prevEnd; }
+		void SetStart(sf::Vector2i& _start) { start = _start; }
+		void SetEnd(sf::Vector2i& _end) { end = _end; }
+		void SetPrevStart(sf::Vector2i& _prevStart) { prevStart = _prevStart; }
+		void SetPrevEnd(sf::Vector2i& _prevEnd) { prevEnd = _prevEnd; }
 
 		// Getters
 		sf::Vector2i GetStart() { return start; };

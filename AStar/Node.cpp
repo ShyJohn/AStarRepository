@@ -44,6 +44,8 @@ namespace AIFramework
 				break;
 			case END: colour = sf::Color::Blue;
 				break;
+			case PATH: colour = sf::Color::Magenta;
+				break;
 			}
 			break;
 		case HOVER_EMPTY: colour = sf::Color(255, 255, 255, 200);
