@@ -1,8 +1,8 @@
-#include "Application.h"
+#include "AStarApplication.h"
 
 namespace AIFramework
 {
-	void Application::Init()
+	void AStarApplication::Init()
 	{
 		int i, j;
 
@@ -36,7 +36,7 @@ namespace AIFramework
 		leftclick = false;
 	}
 
-	void Application::Update()
+	void AStarApplication::Update()
 	{
 		Input();
 		FpsCounter();
@@ -46,7 +46,7 @@ namespace AIFramework
 		Render();
 	}
 
-	void Application::Render()
+	void AStarApplication::Render()
 	{
 		window.clear();
 
@@ -65,12 +65,12 @@ namespace AIFramework
 		window.display();
 	}
 
-	void Application::Input()
+	void AStarApplication::Input()
 	{
 		ImguiInput();
 
 	}
-	void Application::ImguiInput()
+	void AStarApplication::ImguiInput()
 	{
 		ImGui::SFML::Update(window, deltaClock.restart());
 
@@ -122,7 +122,7 @@ namespace AIFramework
 	}
 
 
-	void Application::FpsCounter()
+	void AStarApplication::FpsCounter()
 	{
 		float lastTime = 0;
 
@@ -141,7 +141,7 @@ namespace AIFramework
 
 	}
 
-	void Application::ResetGrid()
+	void AStarApplication::ResetGrid()
 	{
 		int i = 0;
 		int j = 0;
@@ -158,7 +158,7 @@ namespace AIFramework
 		}
 	}
 
-	void Application::DetectSelectedNode()
+	void AStarApplication::DetectSelectedNode()
 	{
 		// Detect selected node using mouse position
 		if (sf::Mouse::getPosition(window).x < (RECTANGLE_SIZE * (GRID_WIDTH))

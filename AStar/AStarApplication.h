@@ -8,7 +8,7 @@ namespace AIFramework
 {
 	enum BuildType { BUILD_NONE, BUILD_EMPTY, BUILD_WALL, BUILD_START, BUILD_END };
 
-	class Application : BaseApplication
+	class AStarApplication : BaseApplication
 	{
 		// CAMERA
 		sf::View camera;
@@ -43,10 +43,10 @@ namespace AIFramework
 		void Update();
 
 		// CONSTRUCTOR
-		Application(sf::RenderWindow& windowref) : window(windowref) {
+		AStarApplication(sf::RenderWindow& windowref) : window(windowref) {
 			Init();
 		}
-		~Application() {};
+		~AStarApplication() {};
 
 		// SFML WINDOW
 		sf::RenderWindow& window;

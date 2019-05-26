@@ -161,7 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
+    <ClInclude Include="AStarApplication.h" />
     <ClInclude Include="AStar.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="FileHandler.h" />
@@ -174,7 +174,7 @@
     <ClCompile Include="..\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="..\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="..\imgui-sfml-master\imgui-SFML.cpp" />
-    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AStarApplication.cpp" />
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="main.cpp" />

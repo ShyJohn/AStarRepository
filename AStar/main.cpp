@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "AStarApplication.h"
 
 
 using namespace AIFramework;
@@ -7,7 +7,7 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "Application", sf::Style::Default);
 
-	Application app(window);
+	AStarApplication app(window);
 
 	ImGui::SFML::Init(window);
 
