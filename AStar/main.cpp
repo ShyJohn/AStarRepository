@@ -1,16 +1,19 @@
 #include "AStarApplication.h"
-
+#include "MenuApplication.h"
+#include "NeuralNetworkApplication.h"
 
 using namespace AIFramework;
 
-int main()
+void main()
 {
+	/*AppType appType;
+
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "Application", sf::Style::Default);
 
 	AStarApplication app(window);
 
 	ImGui::SFML::Init(window);
-
+	
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -22,7 +25,13 @@ int main()
 				window.close();
 		}
 		app.Update();
-	}
+	}*/
 
-	return 0;
+	//MenuApplication* menuApp = new MenuApplication;
+	//menuApp->Run();
+
+	NeuralNetworkApplication* NNApp = new NeuralNetworkApplication;
+	NNApp->Run();
+
+	return;
 }

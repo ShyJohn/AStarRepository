@@ -4,6 +4,11 @@ namespace AIFramework
 {
 	void AStarApplication::Init()
 	{
+
+		window.create(sf::VideoMode(1600, 900), "A*", sf::Style::Default);
+
+		ImGui::SFML::Init(window);
+
 		int i, j;
 
 		// INIT CAMERA
@@ -225,5 +230,23 @@ namespace AIFramework
 				leftclick = false;
 		}
 
+	}
+
+	void AStarApplication::Run()
+	{
+
+		while (window.isOpen())
+		{
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				ImGui::SFML::ProcessEvent(event);
+
+				if (event.type == sf::Event::Closed)
+					window.close();
+			}
+			Update();
+		}
+		
 	}
 }

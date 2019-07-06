@@ -1,6 +1,6 @@
 #include "BaseApplication.h"
 
-namespace AIFramework
+namespace AIFramework 
 {
-	
+
 }

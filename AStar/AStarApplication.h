@@ -11,13 +11,10 @@ namespace AIFramework
 	class AStarApplication : BaseApplication
 	{
 		// CAMERA
-		sf::View camera;
-
 		AStar pathfinder;
 
 		BuildType buildType;
-		sf::Clock deltaClock;
-		sf::Clock timer;
+
 
 		FileHandler fileHandler;
 
@@ -42,14 +39,15 @@ namespace AIFramework
 		void Render();
 		void Update();
 
+		void Run();
 		// CONSTRUCTOR
-		AStarApplication(sf::RenderWindow& windowref) : window(windowref) {
+		AStarApplication() {
 			Init();
 		}
 		~AStarApplication() {};
 
 		// SFML WINDOW
-		sf::RenderWindow& window;
+		//sf::RenderWindow& window;
 
 		Node** node;
 

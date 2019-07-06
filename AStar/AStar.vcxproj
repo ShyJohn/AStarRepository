@@ -166,6 +166,8 @@
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="FileHandler.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="MenuApplication.h" />
+    <ClInclude Include="NeuralNetworkApplication.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +180,8 @@
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuApplication.cpp" />
+    <ClCompile Include="NeuralNetworkApplication.cpp" />
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
