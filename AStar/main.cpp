@@ -27,11 +27,14 @@ void main()
 		app.Update();
 	}*/
 
-	//MenuApplication* menuApp = new MenuApplication;
-	//menuApp->Run();
+	/*MenuApplication* menuApp = new MenuApplication;
+	menuApp->Run();*/
 
-	NeuralNetworkApplication* NNApp = new NeuralNetworkApplication;
-	NNApp->Run();
+	/*NeuralNetworkApplication* NNApp = new NeuralNetworkApplication;
+	NNApp->Run();*/
+
+	AStarApplication* AStarApp = new AStarApplication;
+	AStarApp->Run();
 
 	return;
 }

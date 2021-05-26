@@ -6,7 +6,7 @@ namespace AIFramework
 	{
 		window.create(sf::VideoMode(1600, 900), "Main Menu", sf::Style::Default);
 
-		//ImGui::SFML::Init(window);
+		ImGui::SFML::Init(window);
 	}
 
 	void NeuralNetworkApplication::Update()
@@ -20,19 +20,21 @@ namespace AIFramework
 
 		// Render GUI
 
-		//ImGui::SFML::Render(window);
+		ImGui::SFML::Render(window);
 
 		window.display();
 	}
 	void NeuralNetworkApplication::Input()
 	{
-		//ImGui::SFML::Update(window, deltaClock.restart());
+		ImGui::SFML::Update(window, deltaClock.restart());
+
+		ImGui::Begin("AI Framework");
 
 		if (ImGui::Button("Stuff")) {
 
 		}
 
-		//ImGui::End();
+		ImGui::End();
 	}
 	void NeuralNetworkApplication::Run()
 	{

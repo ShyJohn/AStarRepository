@@ -47,7 +47,7 @@ namespace AIFramework
 		~AStarApplication() {};
 
 		// SFML WINDOW
-		//sf::RenderWindow& window;
+		// sf::RenderWindow& window;
 
 		Node** node;
 
